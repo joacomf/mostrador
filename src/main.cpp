@@ -5,24 +5,56 @@
 Teclado* teclado;
 Pantalla* pantalla;
 
-string valorActual;
+string mesa;
+string tiempo;
+char cursor = 'M';
 
 void setup() {
+  Serial.begin(115200);
   teclado = new Teclado();
   pantalla = new Pantalla();
 }
 
-void manejarInputs(char teclaPresionada){
-  if (teclaPresionada != 'N'){
-    valorActual += teclaPresionada;
+void manejarNumero(char teclaPresionada){
+  if(cursor == 'M'){
+    mesa += teclaPresionada;
+  } else {
+    tiempo += teclaPresionada;
   }
 }
 
+void decidirQueHacer(char teclaPresionada){
+  switch (teclaPresionada){
+    case 'A':
+        break;
+    case 'B':
+        break;
+    case 'C':
+        cursor = 'M';
+        break;
+    case 'D':
+       cursor = 'T';
+       break;
+    case '*':
+        break;
+    case '#':
+        break;
+    case 'N':
+        //Nada
+        break;
+    default:
+        manejarNumero(teclaPresionada);
+       break;
+  }
+}
+
+
 void loop() {
   char teclaPresionada = teclado->leer();
-  manejarInputs(teclaPresionada);
-  pantalla->establecerMesa(valorActual);
-  pantalla->establecerTiempo("15");
+  decidirQueHacer(teclaPresionada);
+  pantalla->establecerMesa(mesa);
+  pantalla->establecerTiempo(tiempo);
   pantalla->establecerNotificacion("");
+  pantalla->establecerCursor(cursor);
   pantalla->mostrar();
 }

@@ -4,6 +4,8 @@ LiquidCrystal lcd(22, 23, 5, 18, 19, 21);
 
 Pantalla::Pantalla() {
     lcd.begin(16, 2);
+    lcd.cursor();
+    lcd.blink();
 }
 
 void Pantalla::mostrar() {
@@ -11,10 +13,11 @@ void Pantalla::mostrar() {
     this->imprimirMesa();
     this->imprimirTiempo();
     this->imprimirNotificacion();
+    this->posicionarCursor();
+    delay(200);
 }
 
 void Pantalla::imprimirMarco(){
-    lcd.home();
     lcd.setCursor(0, 1);
     lcd.print("Mesa:");
     lcd.setCursor(9, 1);
@@ -22,15 +25,13 @@ void Pantalla::imprimirMarco(){
 }
 
 void Pantalla::imprimirMesa(){
-    lcd.home();
     lcd.setCursor(5, 1);
     lcd.print(this->mesa.c_str());
 }
 
 
 void Pantalla::imprimirTiempo(){
-    lcd.home();
-    lcd.setCursor(12, 1);
+    lcd.setCursor(11, 1);
     lcd.print(this->tiempo.c_str());
 }
 
@@ -39,7 +40,11 @@ void Pantalla::imprimirNotificacion(){
 }
 
 void Pantalla::posicionarCursor(){
-    // Implementar
+    if (this->cursor == 'M'){
+        lcd.setCursor(5, 1);
+    }else{
+        lcd.setCursor(11, 1);
+    }
 }
 
 void Pantalla::establecerMesa(string mesa){
