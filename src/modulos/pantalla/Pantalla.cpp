@@ -5,7 +5,6 @@ LiquidCrystal lcd(22, 23, 5, 18, 19, 21);
 Pantalla::Pantalla() {
     lcd.begin(16, 2);
     lcd.cursor();
-    lcd.blink();
 }
 
 void Pantalla::mostrar() {
@@ -41,9 +40,9 @@ void Pantalla::imprimirNotificacion(){
 
 void Pantalla::posicionarCursor(){
     if (this->cursor == 'M'){
-        lcd.setCursor(5, 1);
+        lcd.setCursor(5 + this->mesa.length(), 1);
     }else{
-        lcd.setCursor(11, 1);
+        lcd.setCursor(11 + this->tiempo.length(), 1);
     }
 }
 
