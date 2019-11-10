@@ -13,12 +13,12 @@ Mesa* mesa;
 Tiempo* tiempo;
 
 void setup() {
-  Serial.begin(115200);
-  teclado = new Teclado();
-  pantalla = new Pantalla();
-  mesa = new Mesa();
-  tiempo = new Tiempo();
-  cursor = mesa;
+    Serial.begin(115200);
+    teclado = new Teclado();
+    pantalla = new Pantalla();
+    mesa = new Mesa();
+    tiempo = new Tiempo();
+    cursor = mesa;
 }
 
 void decidirQueHacer(char teclaPresionada){
@@ -31,8 +31,8 @@ void decidirQueHacer(char teclaPresionada){
         cursor = mesa;
         break;
     case 'D':
-       cursor = tiempo;
-       break;
+        cursor = tiempo;
+        break;
     case '*':
         break;
     case '#':
@@ -47,13 +47,12 @@ void decidirQueHacer(char teclaPresionada){
   }
 }
 
-
 void loop() {
-  char teclaPresionada = teclado->leer();
-  decidirQueHacer(teclaPresionada);
-  pantalla->establecerMesa(mesa->obtenerValor());
-  pantalla->establecerTiempo(tiempo->obtenerValor());
-  pantalla->establecerNotificacion("");
-  pantalla->establecerCursor(cursor->obtenerId());
-  pantalla->mostrar();
+    char teclaPresionada = teclado->leer();
+    decidirQueHacer(teclaPresionada);
+    pantalla->establecerMesa(mesa->obtenerValor());
+    pantalla->establecerTiempo(tiempo->obtenerValor());
+    pantalla->establecerNotificacion("");
+    pantalla->establecerCursor(cursor->obtenerId());
+    pantalla->mostrar();
 }
