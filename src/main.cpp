@@ -47,12 +47,16 @@ void decidirQueHacer(char teclaPresionada){
   }
 }
 
-void loop() {
-    char teclaPresionada = teclado->leer();
-    decidirQueHacer(teclaPresionada);
+void actualizarPantalla(){
     pantalla->establecerMesa(mesa->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
     pantalla->establecerNotificacion("");
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
+}
+
+void loop() {
+    char teclaPresionada = teclado->leer();
+    decidirQueHacer(teclaPresionada);
+    actualizarPantalla();
 }
