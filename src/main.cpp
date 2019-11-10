@@ -1,26 +1,24 @@
 #include <Arduino.h>
 #include "modulos/teclado/Teclado.hpp"
 #include "modulos/pantalla/Pantalla.hpp"
+#include "modelos/Editable.hpp"
+#include "modelos/Mesa.hpp"
+#include "modelos/Tiempo.hpp"
 
 Teclado* teclado;
 Pantalla* pantalla;
 
-string mesa;
-string tiempo;
-char cursor = 'M';
+Editable* cursor;
+Mesa* mesa;
+Tiempo* tiempo;
 
 void setup() {
   Serial.begin(115200);
   teclado = new Teclado();
   pantalla = new Pantalla();
-}
-
-void manejarNumero(char teclaPresionada){
-  if(cursor == 'M'){
-    mesa += teclaPresionada;
-  } else {
-    tiempo += teclaPresionada;
-  }
+  mesa = new Mesa();
+  tiempo = new Tiempo();
+  cursor = mesa;
 }
 
 void decidirQueHacer(char teclaPresionada){
@@ -30,20 +28,21 @@ void decidirQueHacer(char teclaPresionada){
     case 'B':
         break;
     case 'C':
-        cursor = 'M';
+        cursor = mesa;
         break;
     case 'D':
-       cursor = 'T';
+       cursor = tiempo;
        break;
     case '*':
         break;
     case '#':
+        cursor->quitarUnDigito();
         break;
     case 'N':
         //Nada
         break;
     default:
-        manejarNumero(teclaPresionada);
+        cursor->agregarDigito(teclaPresionada);
        break;
   }
 }
@@ -52,9 +51,9 @@ void decidirQueHacer(char teclaPresionada){
 void loop() {
   char teclaPresionada = teclado->leer();
   decidirQueHacer(teclaPresionada);
-  pantalla->establecerMesa(mesa);
-  pantalla->establecerTiempo(tiempo);
+  pantalla->establecerMesa(mesa->obtenerValor());
+  pantalla->establecerTiempo(tiempo->obtenerValor());
   pantalla->establecerNotificacion("");
-  pantalla->establecerCursor(cursor);
+  pantalla->establecerCursor(cursor->obtenerId());
   pantalla->mostrar();
 }

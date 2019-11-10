@@ -13,9 +13,11 @@ void Pantalla::mostrar() {
     this->imprimirTiempo();
     this->imprimirNotificacion();
     this->posicionarCursor();
+    delay(100);
 }
 
 void Pantalla::imprimirMarco(){
+    lcd.clear();
     lcd.setCursor(this->POSICION_INICIAL_MESA, this->SEGUNDA_FILA);
     lcd.print(this->MESA_LABEL);
     lcd.setCursor(this->POSICION_INICIAL_TIEMPO, this->SEGUNDA_FILA);
