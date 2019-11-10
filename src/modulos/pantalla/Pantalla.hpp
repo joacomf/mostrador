@@ -28,6 +28,18 @@ class Pantalla {
         string tiempo = "";
         string notificacion = "";
         char cursor;
+
+        const short POSICION_INICIAL_MESA = 0;
+        const short POSICION_INICIAL_TIEMPO = 9;
+
+        const short POSICION_CURSOR_MESA = 5;
+        const short POSICION_CURSOR_TIEMPO = 11;
+
+        const short PRIMER_FILA = 0;
+        const short SEGUNDA_FILA = 1;
+
+        const char* MESA_LABEL = "Mesa:";
+        const char* TIEMPO_LABEL = "T:";
 };
 
 

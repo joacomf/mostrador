@@ -13,24 +13,23 @@ void Pantalla::mostrar() {
     this->imprimirTiempo();
     this->imprimirNotificacion();
     this->posicionarCursor();
-    delay(200);
 }
 
 void Pantalla::imprimirMarco(){
-    lcd.setCursor(0, 1);
-    lcd.print("Mesa:");
-    lcd.setCursor(9, 1);
-    lcd.print("T:");
+    lcd.setCursor(this->POSICION_INICIAL_MESA, this->SEGUNDA_FILA);
+    lcd.print(this->MESA_LABEL);
+    lcd.setCursor(this->POSICION_INICIAL_TIEMPO, this->SEGUNDA_FILA);
+    lcd.print(this->TIEMPO_LABEL);
 }
 
 void Pantalla::imprimirMesa(){
-    lcd.setCursor(5, 1);
+    lcd.setCursor(this->POSICION_CURSOR_MESA, this->SEGUNDA_FILA);
     lcd.print(this->mesa.c_str());
 }
 
 
 void Pantalla::imprimirTiempo(){
-    lcd.setCursor(11, 1);
+    lcd.setCursor(this->POSICION_CURSOR_TIEMPO, this->SEGUNDA_FILA);
     lcd.print(this->tiempo.c_str());
 }
 
@@ -40,9 +39,9 @@ void Pantalla::imprimirNotificacion(){
 
 void Pantalla::posicionarCursor(){
     if (this->cursor == 'M'){
-        lcd.setCursor(5 + this->mesa.length(), 1);
+        lcd.setCursor(this->POSICION_CURSOR_MESA + this->mesa.length(), this->SEGUNDA_FILA);
     }else{
-        lcd.setCursor(11 + this->tiempo.length(), 1);
+        lcd.setCursor(this->POSICION_CURSOR_TIEMPO + this->tiempo.length(), this->SEGUNDA_FILA);
     }
 }
 
