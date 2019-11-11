@@ -36,7 +36,8 @@ void Pantalla::imprimirTiempo(){
 }
 
 void Pantalla::imprimirNotificacion(){
-    // Implementar
+    lcd.home();
+    lcd.print(this->notificacion.c_str());
 }
 
 void Pantalla::posicionarCursor(){

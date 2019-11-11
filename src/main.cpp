@@ -4,6 +4,7 @@
 #include "modelos/Editable.hpp"
 #include "modelos/Mesa.hpp"
 #include "modelos/Tiempo.hpp"
+#include "modelos/Notificador.hpp"
 
 Teclado* teclado;
 Pantalla* pantalla;
@@ -11,6 +12,7 @@ Pantalla* pantalla;
 Editable* cursor;
 Mesa* mesa;
 Tiempo* tiempo;
+Notificador* notificador;
 
 void setup() {
     Serial.begin(115200);
@@ -18,14 +20,19 @@ void setup() {
     pantalla = new Pantalla();
     mesa = new Mesa();
     tiempo = new Tiempo();
+    notificador = new Notificador();
     cursor = mesa;
+    notificador->agregarNotificacion("Noti1");
+    notificador->agregarNotificacion("Noti2");
 }
 
 void decidirQueHacer(char teclaPresionada){
   switch (teclaPresionada){
     case 'A':
+        notificador->disminuirNotificacionActiva();
         break;
     case 'B':
+        notificador->incrementarNotificacionActiva();
         break;
     case 'C':
         cursor = mesa;
@@ -50,7 +57,7 @@ void decidirQueHacer(char teclaPresionada){
 void actualizarPantalla(){
     pantalla->establecerMesa(mesa->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
-    pantalla->establecerNotificacion("");
+    pantalla->establecerNotificacion(notificador->mostrarNotificacionActiva());
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
 }
