@@ -4,7 +4,7 @@
 #include "modelos/Editable.hpp"
 #include "modelos/Mesa.hpp"
 #include "modelos/Tiempo.hpp"
-#include "modelos/Notificador.hpp"
+#include "modelos/BandejaDeNotificaciones.hpp"
 
 Teclado* teclado;
 Pantalla* pantalla;
@@ -12,7 +12,7 @@ Pantalla* pantalla;
 Editable* cursor;
 Mesa* mesa;
 Tiempo* tiempo;
-Notificador* notificador;
+BandejaDeNotificaciones* bandejaDeNotificaciones;
 
 void setup() {
     Serial.begin(115200);
@@ -20,19 +20,20 @@ void setup() {
     pantalla = new Pantalla();
     mesa = new Mesa();
     tiempo = new Tiempo();
-    notificador = new Notificador();
+    bandejaDeNotificaciones = new BandejaDeNotificaciones();
     cursor = mesa;
-    notificador->agregarNotificacion("Noti1");
-    notificador->agregarNotificacion("Noti2");
+    bandejaDeNotificaciones->agregarNotificacion("Mesa 1 OK");
+    bandejaDeNotificaciones->agregarNotificacion("Mesa 2 cuenta");
+    bandejaDeNotificaciones->agregarNotificacion("Mesa 8 consulta");
 }
 
 void decidirQueHacer(char teclaPresionada){
   switch (teclaPresionada){
     case 'A':
-        notificador->disminuirNotificacionActiva();
+        bandejaDeNotificaciones->notificacionAnterior();
         break;
     case 'B':
-        notificador->incrementarNotificacionActiva();
+        bandejaDeNotificaciones->notificacionSiguiente();
         break;
     case 'C':
         cursor = mesa;
@@ -57,7 +58,7 @@ void decidirQueHacer(char teclaPresionada){
 void actualizarPantalla(){
     pantalla->establecerMesa(mesa->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
-    pantalla->establecerNotificacion(notificador->mostrarNotificacionActiva());
+    pantalla->establecerNotificacion(bandejaDeNotificaciones->mostrarNotificacionActiva());
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
 }

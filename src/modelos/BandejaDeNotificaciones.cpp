@@ -1,27 +1,27 @@
-#include "Notificador.hpp"
+#include "BandejaDeNotificaciones.hpp"
 
-Notificador::Notificador(){
+BandejaDeNotificaciones::BandejaDeNotificaciones(){
     this->notificacionActiva = 0;
 }
 
-void Notificador::agregarNotificacion(string notificacion){
+void BandejaDeNotificaciones::agregarNotificacion(string notificacion){
     this->notificaciones.push_back(notificacion);
-    this->incrementarNotificacionActiva();
+    this->notificacionSiguiente();
 }
 
-void Notificador::incrementarNotificacionActiva(){
+void BandejaDeNotificaciones::notificacionSiguiente(){
     if(this->notificacionActiva < this->notificaciones.size() - 1){
         this->notificacionActiva++;
     }
 }
 
-void Notificador::disminuirNotificacionActiva(){
+void BandejaDeNotificaciones::notificacionAnterior(){
     if(this->notificacionActiva > 0){
         this->notificacionActiva--;
     }
 }
 
-string Notificador::mostrarNotificacionActiva(){
+string BandejaDeNotificaciones::mostrarNotificacionActiva(){
     if(!this->notificaciones.empty()){
         return this->notificaciones.at(this->notificacionActiva);
     } else {
