@@ -13,32 +13,32 @@ class Pantalla {
         Pantalla();
         void mostrar();
 
-        void establecerMesa(string mesa);
+        void establecerCliente(string cliente);
         void establecerTiempo(string tiempo);
         void establecerNotificacion(string notificacion);
         void establecerCursor(char cursor);
     private:
         void imprimirMarco();
-        void imprimirMesa();
+        void imprimirCliente();
         void imprimirTiempo();
         void imprimirNotificacion();
         void posicionarCursor();
 
-        string mesa = "";
+        string cliente = "";
         string tiempo = "";
         string notificacion = "";
         char cursor;
 
-        const short POSICION_INICIAL_MESA = 0;
+        const short POSICION_INICIAL_CLIENTE = 0;
         const short POSICION_INICIAL_TIEMPO = 9;
 
-        const short POSICION_CURSOR_MESA = 5;
+        const short POSICION_CURSOR_CLIENTE = 4;
         const short POSICION_CURSOR_TIEMPO = 11;
 
         const short PRIMER_FILA = 0;
         const short SEGUNDA_FILA = 1;
 
-        const char* MESA_LABEL = "Mesa:";
+        const char* CLIENTE_LABEL = "Cli:";
         const char* TIEMPO_LABEL = "T:";
 };
 

@@ -9,7 +9,7 @@ Pantalla::Pantalla() {
 
 void Pantalla::mostrar() {
     this->imprimirMarco();
-    this->imprimirMesa();
+    this->imprimirCliente();
     this->imprimirTiempo();
     this->imprimirNotificacion();
     this->posicionarCursor();
@@ -18,15 +18,15 @@ void Pantalla::mostrar() {
 
 void Pantalla::imprimirMarco(){
     lcd.clear();
-    lcd.setCursor(this->POSICION_INICIAL_MESA, this->SEGUNDA_FILA);
-    lcd.print(this->MESA_LABEL);
+    lcd.setCursor(this->POSICION_INICIAL_CLIENTE, this->SEGUNDA_FILA);
+    lcd.print(this->CLIENTE_LABEL);
     lcd.setCursor(this->POSICION_INICIAL_TIEMPO, this->SEGUNDA_FILA);
     lcd.print(this->TIEMPO_LABEL);
 }
 
-void Pantalla::imprimirMesa(){
-    lcd.setCursor(this->POSICION_CURSOR_MESA, this->SEGUNDA_FILA);
-    lcd.print(this->mesa.c_str());
+void Pantalla::imprimirCliente(){
+    lcd.setCursor(this->POSICION_CURSOR_CLIENTE, this->SEGUNDA_FILA);
+    lcd.print(this->cliente.c_str());
 }
 
 
@@ -41,15 +41,15 @@ void Pantalla::imprimirNotificacion(){
 }
 
 void Pantalla::posicionarCursor(){
-    if (this->cursor == 'M'){
-        lcd.setCursor(this->POSICION_CURSOR_MESA + this->mesa.length(), this->SEGUNDA_FILA);
+    if (this->cursor == 'C'){
+        lcd.setCursor(this->POSICION_CURSOR_CLIENTE + this->cliente.length(), this->SEGUNDA_FILA);
     }else{
         lcd.setCursor(this->POSICION_CURSOR_TIEMPO + this->tiempo.length(), this->SEGUNDA_FILA);
     }
 }
 
-void Pantalla::establecerMesa(string mesa){
-    this->mesa = mesa;
+void Pantalla::establecerCliente(string cliente){
+    this->cliente = cliente;
 }
 void Pantalla::establecerTiempo(string tiempo){
     this->tiempo = tiempo;
