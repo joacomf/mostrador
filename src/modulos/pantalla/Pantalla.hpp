@@ -6,6 +6,7 @@
 #include <LiquidCrystal.h>
 
 #include <string>
+#include "../../modelos/Notificacion.hpp"
 using namespace std;
 
 class Pantalla {
@@ -15,7 +16,7 @@ class Pantalla {
 
         void establecerCliente(string cliente);
         void establecerTiempo(string tiempo);
-        void establecerNotificacion(string notificacion);
+        void establecerNotificacion(Notificacion* notificacion);
         void establecerCursor(char cursor);
     private:
         void imprimirMarco();
@@ -26,7 +27,7 @@ class Pantalla {
 
         string cliente = "";
         string tiempo = "";
-        string notificacion = "";
+        Notificacion* notificacion;
         char cursor;
 
         const short POSICION_INICIAL_CLIENTE = 0;

@@ -37,7 +37,11 @@ void Pantalla::imprimirTiempo(){
 
 void Pantalla::imprimirNotificacion(){
     lcd.home();
-    lcd.print(this->notificacion.c_str());
+    string contenidoNotificacion = "";
+    if(this->notificacion != NULL){
+        contenidoNotificacion = this->notificacion->obtenerContenido();
+    }
+    lcd.print(contenidoNotificacion.c_str());
 }
 
 void Pantalla::posicionarCursor(){
@@ -54,7 +58,7 @@ void Pantalla::establecerCliente(string cliente){
 void Pantalla::establecerTiempo(string tiempo){
     this->tiempo = tiempo;
 }
-void Pantalla::establecerNotificacion(string notificacion){
+void Pantalla::establecerNotificacion(Notificacion* notificacion){
     this->notificacion = notificacion;
 }
 void Pantalla::establecerCursor(char cursor){

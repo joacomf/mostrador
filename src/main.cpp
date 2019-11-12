@@ -22,9 +22,9 @@ void setup() {
     tiempo = new Tiempo();
     bandejaDeNotificaciones = new BandejaDeNotificaciones();
     cursor = cliente;
-    bandejaDeNotificaciones->agregarNotificacion("1 REC. MENSAJE");
-    bandejaDeNotificaciones->agregarNotificacion("2 MOZO");
-    bandejaDeNotificaciones->agregarNotificacion("8 CONS. ESPERA");
+    bandejaDeNotificaciones->agregarNotificacion(new Notificacion("1 REC. MENSAJE"));
+    bandejaDeNotificaciones->agregarNotificacion(new Notificacion("2 MOZO"));
+    bandejaDeNotificaciones->agregarNotificacion(new Notificacion("8 CONS. ESPERA"));
 }
 
 void decidirQueHacer(char teclaPresionada){
@@ -58,7 +58,8 @@ void decidirQueHacer(char teclaPresionada){
 void actualizarPantalla(){
     pantalla->establecerCliente(cliente->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
-    pantalla->establecerNotificacion(bandejaDeNotificaciones->mostrarNotificacionActiva());
+    Notificacion* notificacionActiva = bandejaDeNotificaciones->mostrarNotificacionActiva();
+    pantalla->establecerNotificacion(notificacionActiva);
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
 }
@@ -67,4 +68,5 @@ void loop() {
     char teclaPresionada = teclado->leer();
     decidirQueHacer(teclaPresionada);
     actualizarPantalla();
+
 }

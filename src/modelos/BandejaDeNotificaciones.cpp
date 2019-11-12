@@ -4,7 +4,7 @@ BandejaDeNotificaciones::BandejaDeNotificaciones(){
     this->notificacionActiva = 0;
 }
 
-void BandejaDeNotificaciones::agregarNotificacion(string notificacion){
+void BandejaDeNotificaciones::agregarNotificacion(Notificacion* notificacion){
     this->notificaciones.push_back(notificacion);
     this->notificacionSiguiente();
 }
@@ -21,10 +21,10 @@ void BandejaDeNotificaciones::notificacionAnterior(){
     }
 }
 
-string BandejaDeNotificaciones::mostrarNotificacionActiva(){
+Notificacion* BandejaDeNotificaciones::mostrarNotificacionActiva(){
     if(!this->notificaciones.empty()){
         return this->notificaciones.at(this->notificacionActiva);
     } else {
-        return "";
+        return NULL;
     }
 }
