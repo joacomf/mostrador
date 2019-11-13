@@ -18,6 +18,10 @@ void Pantalla::mostrar() {
     }
 }
 
+void Pantalla::reiniciarCambios(){
+    this->hayCambios = false;
+}
+
 void Pantalla::imprimirMarco(){
     lcd.clear();
     lcd.setCursor(this->POSICION_INICIAL_CLIENTE, this->SEGUNDA_FILA);

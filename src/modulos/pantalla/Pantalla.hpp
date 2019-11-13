@@ -17,7 +17,7 @@ class Pantalla {
         void establecerTiempo(string tiempo);
         void establecerNotificacion(string notificacion);
         void establecerCursor(char cursor);
-        bool hayCambios = false;
+        void reiniciarCambios();
     private:
         void imprimirMarco();
         void imprimirCliente();
@@ -28,6 +28,7 @@ class Pantalla {
         string cliente = "";
         string tiempo = "";
         string notificacion = "";
+        bool hayCambios = true;
         char cursor;
 
         const short POSICION_INICIAL_CLIENTE = 0;

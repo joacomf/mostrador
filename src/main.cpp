@@ -67,5 +67,5 @@ void loop() {
     char teclaPresionada = teclado->leer();
     decidirQueHacer(teclaPresionada);
     actualizarPantalla();
-    pantalla->hayCambios = false;
+    pantalla->reiniciarCambios();
 }
