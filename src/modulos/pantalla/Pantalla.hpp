@@ -17,6 +17,7 @@ class Pantalla {
         void establecerTiempo(string tiempo);
         void establecerNotificacion(string notificacion);
         void establecerCursor(char cursor);
+        bool hayCambios = false;
     private:
         void imprimirMarco();
         void imprimirCliente();
