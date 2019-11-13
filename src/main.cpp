@@ -5,6 +5,9 @@
 #include "modelos/Cliente.hpp"
 #include "modelos/Tiempo.hpp"
 #include "modelos/BandejaDeNotificaciones.hpp"
+#include <HTTPClient.h>
+#include <WiFi.h>
+#include <ESPAsyncWebServer.h>
 
 Teclado* teclado;
 Pantalla* pantalla;
@@ -13,6 +16,8 @@ Editable* cursor;
 Cliente* cliente;
 Tiempo* tiempo;
 BandejaDeNotificaciones* bandejaDeNotificaciones;
+HTTPClient client;
+AsyncWebServer server(80);
 
 void setup() {
     Serial.begin(115200);
@@ -25,6 +30,13 @@ void setup() {
     bandejaDeNotificaciones->agregarNotificacion("1 REC. MENSAJE");
     bandejaDeNotificaciones->agregarNotificacion("2 MOZO");
     bandejaDeNotificaciones->agregarNotificacion("8 CONS. ESPERA");
+    server.on("/ping", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(200, "text/plain", "pong");
+    });
+    WiFi.softAP("ESP32", "12345678");
+    Serial.print("IP:");
+    Serial.println(WiFi.softAPIP());
+    server.begin();
 }
 
 void decidirQueHacer(char teclaPresionada){
@@ -67,4 +79,10 @@ void loop() {
     char teclaPresionada = teclado->leer();
     decidirQueHacer(teclaPresionada);
     actualizarPantalla();
+    client.begin("http://192.168.4.2:5000/build");
+    int responseCode = client.GET();
+    Serial.print("Respuesta: ");
+    Serial.print(responseCode);
+    Serial.print(client.getString());
+    delay(1000);
 }
