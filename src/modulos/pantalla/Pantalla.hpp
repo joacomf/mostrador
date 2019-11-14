@@ -12,18 +12,17 @@ class Pantalla {
     public:
         Pantalla();
         void mostrar();
-
         void establecerCliente(string cliente);
         void establecerTiempo(string tiempo);
         void establecerNotificacion(string notificacion);
         void establecerCursor(char cursor);
-        void reiniciarCambios();
     private:
         void imprimirMarco();
         void imprimirCliente();
         void imprimirTiempo();
         void imprimirNotificacion();
         void posicionarCursor();
+        void reiniciarCambios();
 
         string cliente = "";
         string tiempo = "";

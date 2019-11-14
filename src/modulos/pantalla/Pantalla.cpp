@@ -14,6 +14,7 @@ void Pantalla::mostrar() {
         this->imprimirTiempo();
         this->imprimirNotificacion();
         this->posicionarCursor();
+        this->reiniciarCambios();
         delay(100);
     }
 }
