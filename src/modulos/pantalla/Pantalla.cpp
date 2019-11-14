@@ -55,26 +55,19 @@ void Pantalla::posicionarCursor(){
 }
 
 void Pantalla::establecerCliente(string cliente){
-    if(cliente != this->cliente){
-        this->cliente = cliente;
-        this->hayCambios = true;
-    }
+    this->hayCambios = this->hayCambios || (cliente != this->cliente);
+    this->cliente = cliente;
 }
 void Pantalla::establecerTiempo(string tiempo){
-    if(tiempo != this->tiempo){
-        this->tiempo = tiempo;
-        this->hayCambios = true;
-    }
+    this->hayCambios = this->hayCambios || (tiempo != this->tiempo);
+    this->tiempo = tiempo;
 }
 void Pantalla::establecerNotificacion(string notificacion){
-    if(notificacion != this->notificacion){
-        this->notificacion = notificacion;
-        this->hayCambios = true;
-    }
+    this->hayCambios = this->hayCambios || (notificacion != this->notificacion);
+    this->notificacion = notificacion;
+    
 }
 void Pantalla::establecerCursor(char cursor){
-    if(cursor != this->cursor){
-        this->cursor = cursor;
-        this->hayCambios = true;
-    }
+    this->hayCambios = this->hayCambios || (cursor != this->cursor);
+    this->cursor = cursor;
 }
