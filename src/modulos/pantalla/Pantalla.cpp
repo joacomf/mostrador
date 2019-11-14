@@ -8,12 +8,19 @@ Pantalla::Pantalla() {
 }
 
 void Pantalla::mostrar() {
-    this->imprimirMarco();
-    this->imprimirCliente();
-    this->imprimirTiempo();
-    this->imprimirNotificacion();
-    this->posicionarCursor();
-    delay(100);
+    if(this->hayCambios){
+        this->imprimirMarco();
+        this->imprimirCliente();
+        this->imprimirTiempo();
+        this->imprimirNotificacion();
+        this->posicionarCursor();
+        this->reiniciarCambios();
+        delay(100);
+    }
+}
+
+void Pantalla::reiniciarCambios(){
+    this->hayCambios = false;
 }
 
 void Pantalla::imprimirMarco(){
@@ -49,14 +56,19 @@ void Pantalla::posicionarCursor(){
 }
 
 void Pantalla::establecerCliente(string cliente){
+    this->hayCambios = this->hayCambios || (cliente != this->cliente);
     this->cliente = cliente;
 }
 void Pantalla::establecerTiempo(string tiempo){
+    this->hayCambios = this->hayCambios || (tiempo != this->tiempo);
     this->tiempo = tiempo;
 }
 void Pantalla::establecerNotificacion(string notificacion){
+    this->hayCambios = this->hayCambios || (notificacion != this->notificacion);
     this->notificacion = notificacion;
+    
 }
 void Pantalla::establecerCursor(char cursor){
+    this->hayCambios = this->hayCambios || (cursor != this->cursor);
     this->cursor = cursor;
 }

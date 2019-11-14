@@ -12,7 +12,6 @@ class Pantalla {
     public:
         Pantalla();
         void mostrar();
-
         void establecerCliente(string cliente);
         void establecerTiempo(string tiempo);
         void establecerNotificacion(string notificacion);
@@ -23,10 +22,12 @@ class Pantalla {
         void imprimirTiempo();
         void imprimirNotificacion();
         void posicionarCursor();
+        void reiniciarCambios();
 
         string cliente = "";
         string tiempo = "";
         string notificacion = "";
+        bool hayCambios = true;
         char cursor;
 
         const short POSICION_INICIAL_CLIENTE = 0;
