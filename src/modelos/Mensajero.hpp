@@ -7,6 +7,7 @@
 #include <HTTPClient.h>
 #include <ESPAsyncWebServer.h>
 #include "BandejaDeNotificaciones.hpp"
+#include "Notificacion.hpp"
 
 using namespace std;
 

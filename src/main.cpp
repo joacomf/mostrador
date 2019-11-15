@@ -6,6 +6,7 @@
 #include "modelos/Tiempo.hpp"
 #include "modelos/BandejaDeNotificaciones.hpp"
 #include "modelos/Mensajero.hpp"
+#include "modelos/Notificacion.hpp"
 
 Teclado* teclado;
 Pantalla* pantalla;
@@ -24,9 +25,6 @@ void setup() {
     tiempo = new Tiempo();
     bandejaDeNotificaciones = new BandejaDeNotificaciones();
     cursor = cliente;
-    // bandejaDeNotificaciones->agregarNotificacion("1 REC. MENSAJE");
-    // bandejaDeNotificaciones->agregarNotificacion("2 MOZO");
-    // bandejaDeNotificaciones->agregarNotificacion("8 CONS. ESPERA");
     mensajero = new Mensajero(bandejaDeNotificaciones);
 }
 
@@ -61,7 +59,7 @@ void decidirQueHacer(char teclaPresionada){
 void actualizarPantalla(){
     pantalla->establecerCliente(cliente->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
-    pantalla->establecerNotificacion(bandejaDeNotificaciones->mostrarNotificacionActiva());
+    pantalla->establecerNotificacion(bandejaDeNotificaciones->obtenerTextoDeLaNotificacionActiva());
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
 }

@@ -3,17 +3,19 @@
 
 #include <string>
 #include <vector>
+#include "Notificacion.hpp"
 using namespace std;
 
 class BandejaDeNotificaciones {
     public:
         BandejaDeNotificaciones();
-        void agregarNotificacion(string notificacion);
-        string mostrarNotificacionActiva();
+        void agregarNotificacion(Notificacion* notificacion);
+        Notificacion* mostrarNotificacionActiva();
         void notificacionSiguiente();
         void notificacionAnterior();
+        string obtenerTextoDeLaNotificacionActiva();
     private:
-        vector<string> notificaciones;
+        vector<Notificacion*> notificaciones;
         int notificacionActiva;
         
 };
