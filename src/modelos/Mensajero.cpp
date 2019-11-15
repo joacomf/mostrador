@@ -27,8 +27,9 @@ void Mensajero::iniciarServidor(){
             string notificacion = param->value().c_str();
             notificacion += " MOZO";
             this->bandeja->agregarNotificacion(notificacion);
+            request->send(200, "text/plain", "Mozo Solicitado");
         }
-        request->send(200, "text/plain", "Mozo Solicitado");
+        request->send(400, "text/plain", "Error de parametros");
     });
 
     this->servidor->on("/preguntar_espera", HTTP_GET, [=](AsyncWebServerRequest *request){
@@ -37,8 +38,9 @@ void Mensajero::iniciarServidor(){
             string notificacion = param->value().c_str();
             notificacion += " CONS. ESPERA";
             this->bandeja->agregarNotificacion(notificacion);
+            request->send(200, "text/plain", "Espera consultada");
         }
-        request->send(200, "text/plain", "Espera consultada");
+        request->send(400, "text/plain", "Error de parametros");
     });
     this->servidor->begin();
 }
