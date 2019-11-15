@@ -16,6 +16,36 @@ void Mensajero::iniciarAccessPoint(){
     delay(100);
 }
 
+void Mensajero::registrarCliente(string idCliente, string direccionIp){
+    this->clientesRegistrados[int(idCliente.c_str())] = direccionIp;
+    Serial.print("Registrado: ");
+    Serial.println(this->clientesRegistrados[int(idCliente.c_str())].c_str());
+}
+
+void Mensajero::notificarEspera(int idCliente, int minutos){
+    string ruta = this->clientesRegistrados[idCliente];
+    ruta += "/notificar_espera?minutos=" + minutos;
+    this->cliente->begin(ruta.c_str());
+    int codigoRespuesta = this->cliente->GET();
+    this->cliente->end();
+}
+
+void Mensajero::notificarMesaLista(int idCliente){
+    string ruta = this->clientesRegistrados[idCliente];
+    ruta += "/notificar_mesa_lista";
+    this->cliente->begin(ruta.c_str());
+    int codigoRespuesta = this->cliente->GET();
+    this->cliente->end();
+}
+
+void Mensajero::notificarRecepcionSolicitudMozo(int idCliente){
+    string ruta = this->clientesRegistrados[idCliente];
+    ruta += "/notificar_recepcion_solicitud_mozo";
+    this->cliente->begin(ruta.c_str());
+    int codigoRespuesta = this->cliente->GET();
+    this->cliente->end();
+}
+
 void Mensajero::iniciarServidor(){
     this->servidor->on("/ping", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(200, "text/plain", "pong");
@@ -42,5 +72,16 @@ void Mensajero::iniciarServidor(){
         }
         request->send(400, "text/plain", "Error de parametros");
     });
+
+     this->servidor->on("/registrarse", HTTP_GET, [=](AsyncWebServerRequest *request){
+        AsyncWebParameter* idCliente = request->getParam(0);
+        AsyncWebParameter* ipCliente = request->getParam(1);
+        if(idCliente != NULL && ipCliente != NULL){
+            this->registrarCliente(idCliente->value().c_str(), ipCliente->value().c_str());
+            request->send(200, "text/plain", "Registro exitoso");
+        }
+        request->send(400, "text/plain", "Error de parametros");
+    });
+
     this->servidor->begin();
 }
