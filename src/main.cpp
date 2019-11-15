@@ -5,6 +5,7 @@
 #include "modelos/Cliente.hpp"
 #include "modelos/Tiempo.hpp"
 #include "modelos/BandejaDeNotificaciones.hpp"
+#include "modelos/Mensajero.hpp"
 
 Teclado* teclado;
 Pantalla* pantalla;
@@ -13,6 +14,7 @@ Editable* cursor;
 Cliente* cliente;
 Tiempo* tiempo;
 BandejaDeNotificaciones* bandejaDeNotificaciones;
+Mensajero* mensajero;
 
 void setup() {
     Serial.begin(115200);
@@ -22,9 +24,10 @@ void setup() {
     tiempo = new Tiempo();
     bandejaDeNotificaciones = new BandejaDeNotificaciones();
     cursor = cliente;
-    bandejaDeNotificaciones->agregarNotificacion("1 REC. MENSAJE");
-    bandejaDeNotificaciones->agregarNotificacion("2 MOZO");
-    bandejaDeNotificaciones->agregarNotificacion("8 CONS. ESPERA");
+    // bandejaDeNotificaciones->agregarNotificacion("1 REC. MENSAJE");
+    // bandejaDeNotificaciones->agregarNotificacion("2 MOZO");
+    // bandejaDeNotificaciones->agregarNotificacion("8 CONS. ESPERA");
+    mensajero = new Mensajero(bandejaDeNotificaciones);
 }
 
 void decidirQueHacer(char teclaPresionada){
