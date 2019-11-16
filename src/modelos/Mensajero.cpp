@@ -73,7 +73,18 @@ void Mensajero::iniciarServidor(){
         request->send(400, "text/plain", "Error de parametros");
     });
 
-     this->servidor->on("/registrarse", HTTP_GET, [=](AsyncWebServerRequest *request){
+    this->servidor->on("/confirmar_recepcion_mesa_lista", HTTP_GET, [=](AsyncWebServerRequest *request){
+        AsyncWebParameter* cliente = request->getParam(0);
+        if(cliente != NULL && cliente->name() == "cliente"){
+            string notificacion = cliente->value().c_str();
+            notificacion += " REC. MENSAJE";
+            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion));
+            request->send(200, "text/plain", "Confirmacion exitosa");
+        }
+        request->send(400, "text/plain", "Error de parametros");
+    });
+
+    this->servidor->on("/registrarse", HTTP_GET, [=](AsyncWebServerRequest *request){
         AsyncWebParameter* idCliente = request->getParam(0);
         AsyncWebParameter* ipCliente = request->getParam(1);
         if(idCliente != NULL && ipCliente != NULL){
