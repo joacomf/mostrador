@@ -8,6 +8,7 @@ class Notificacion {
     public:
         Notificacion(string contenido);
         string obtenerContenido();
+        virtual void procesar() = 0;
     private:
         string contenido;
 };

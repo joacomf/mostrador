@@ -37,22 +37,25 @@ void decidirQueHacer(char teclaPresionada){
         bandejaDeNotificaciones->notificacionSiguiente();
         break;
     case 'C':
-        cursor = cliente;
+        if(cursor == cliente){
+            cursor = tiempo;
+        } else {
+            cursor = cliente;
+        }
         break;
     case 'D':
-        cursor = tiempo;
+        cursor->quitarUnDigito();
         break;
     case '*':
         break;
     case '#':
-        cursor->quitarUnDigito();
         break;
     case 'N':
         //Nada
         break;
     default:
         cursor->agregarDigito(teclaPresionada);
-       break;
+        break;
   }
 }
 

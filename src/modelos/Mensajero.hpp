@@ -8,6 +8,9 @@
 #include <ESPAsyncWebServer.h>
 #include "BandejaDeNotificaciones.hpp"
 #include "Notificacion.hpp"
+#include "NotificacionDeSolicitudDeEspera.hpp"
+#include "NotificacionDeAckMesaLista.hpp"
+#include "NotificacionDeSolicitudDeMozo.hpp"
 
 using namespace std;
 

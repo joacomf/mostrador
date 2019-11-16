@@ -56,7 +56,7 @@ void Mensajero::iniciarServidor(){
         if(param != NULL && param->name() == "cliente"){
             string notificacion = param->value().c_str();
             notificacion += " MOZO";
-            this->bandeja->agregarNotificacion(new Notificacion(notificacion));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(notificacion));
             request->send(200, "text/plain", "Mozo Solicitado");
         }
         request->send(400, "text/plain", "Error de parametros");
@@ -67,7 +67,7 @@ void Mensajero::iniciarServidor(){
         if(param != NULL && param->name() == "cliente"){
             string notificacion = param->value().c_str();
             notificacion += " CONS. ESPERA";
-            this->bandeja->agregarNotificacion(new Notificacion(notificacion));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion));
             request->send(200, "text/plain", "Espera consultada");
         }
         request->send(400, "text/plain", "Error de parametros");
