@@ -1,6 +1,6 @@
 #include "NotificacionDeAckMesaLista.hpp"
 
-NotificacionDeAckMesaLista::NotificacionDeAckMesaLista(string contenido)
-    :Notificacion(contenido){}
+NotificacionDeAckMesaLista::NotificacionDeAckMesaLista(string contenido, int idCliente)
+    :Notificacion(contenido, idCliente){}
 
 void NotificacionDeAckMesaLista::procesar(){}

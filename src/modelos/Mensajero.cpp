@@ -52,22 +52,24 @@ void Mensajero::iniciarServidor(){
     });
 
     this->servidor->on("/pedir_mozo", HTTP_GET, [=](AsyncWebServerRequest *request){
-        AsyncWebParameter* param = request->getParam(0);
-        if(param != NULL && param->name() == "cliente"){
-            string notificacion = param->value().c_str();
+        AsyncWebParameter* cliente = request->getParam(0);
+        if(cliente != NULL && cliente->name() == "cliente"){
+            string idCliente = cliente->value().c_str();
+            string notificacion = idCliente;
             notificacion += " MOZO";
-            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(notificacion));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(notificacion, int(idCliente.c_str())));
             request->send(200, "text/plain", "Mozo Solicitado");
         }
         request->send(400, "text/plain", "Error de parametros");
     });
 
     this->servidor->on("/preguntar_espera", HTTP_GET, [=](AsyncWebServerRequest *request){
-        AsyncWebParameter* param = request->getParam(0);
-        if(param != NULL && param->name() == "cliente"){
-            string notificacion = param->value().c_str();
+        AsyncWebParameter* cliente = request->getParam(0);
+        if(cliente != NULL && cliente->name() == "cliente"){
+            string idCliente = cliente->value().c_str();
+            string notificacion = idCliente;
             notificacion += " CONS. ESPERA";
-            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion, int(idCliente.c_str())));
             request->send(200, "text/plain", "Espera consultada");
         }
         request->send(400, "text/plain", "Error de parametros");
@@ -76,19 +78,21 @@ void Mensajero::iniciarServidor(){
     this->servidor->on("/confirmar_recepcion_mesa_lista", HTTP_GET, [=](AsyncWebServerRequest *request){
         AsyncWebParameter* cliente = request->getParam(0);
         if(cliente != NULL && cliente->name() == "cliente"){
-            string notificacion = cliente->value().c_str();
+            string idCliente = cliente->value().c_str();
+            string notificacion = idCliente.c_str();
             notificacion += " REC. MENSAJE";
-            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion));
+            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion, int(idCliente.c_str())));
             request->send(200, "text/plain", "Confirmacion exitosa");
         }
         request->send(400, "text/plain", "Error de parametros");
     });
 
     this->servidor->on("/registrarse", HTTP_GET, [=](AsyncWebServerRequest *request){
-        AsyncWebParameter* idCliente = request->getParam(0);
+        AsyncWebParameter* cliente = request->getParam(0);
         AsyncWebParameter* ipCliente = request->getParam(1);
-        if(idCliente != NULL && ipCliente != NULL){
-            this->registrarCliente(idCliente->value().c_str(), ipCliente->value().c_str());
+        string idCliente = cliente->value().c_str();
+        if(cliente != NULL && ipCliente != NULL){
+            this->registrarCliente(idCliente, ipCliente->value().c_str());
             request->send(200, "text/plain", "Registro exitoso");
         }
         request->send(400, "text/plain", "Error de parametros");

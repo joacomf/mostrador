@@ -5,7 +5,7 @@
 
 class NotificacionDeSolicitudDeMozo : public Notificacion {
     public:
-        NotificacionDeSolicitudDeMozo(string contenido);
+        NotificacionDeSolicitudDeMozo(string contenido, int idCliente);
         virtual void procesar();
 };
 
