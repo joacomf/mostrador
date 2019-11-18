@@ -49,6 +49,9 @@ void decidirQueHacer(char teclaPresionada){
     case '*':
         break;
     case '#':
+        if(cliente->obtenerValor() != ""){
+            mensajero->notificarMesaLista(cliente->obtenerValor().c_str());
+        }
         break;
     case 'N':
         //Nada
