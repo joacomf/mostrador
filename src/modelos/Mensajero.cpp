@@ -17,33 +17,33 @@ void Mensajero::iniciarAccessPoint(){
 }
 
 void Mensajero::registrarCliente(string idCliente, string direccionIp){
-    this->clientesRegistrados[int(idCliente.c_str())] = direccionIp;
+    this->clientesRegistrados[idCliente] = direccionIp;
     Serial.print("Registrado: ");
-    Serial.println(this->clientesRegistrados[int(idCliente.c_str())].c_str());
+    Serial.println(this->clientesRegistrados[idCliente].c_str());
 }
 
-void Mensajero::notificarEspera(int idCliente, int minutos){
-    string ruta = this->clientesRegistrados[idCliente];
+void Mensajero::notificarEspera(string idCliente, int minutos){
+    string ruta = "http://" + this->clientesRegistrados[idCliente];
     ruta += "/notificar_espera?minutos=" + minutos;
-    this->cliente->begin(ruta.c_str());
-    int codigoRespuesta = this->cliente->GET();
-    this->cliente->end();
+    this->cliente.begin(ruta.c_str());
+    int codigoRespuesta = this->cliente.GET();
+    this->cliente.end();
 }
 
-void Mensajero::notificarMesaLista(int idCliente){
-    string ruta = this->clientesRegistrados[idCliente];
+void Mensajero::notificarMesaLista(string idCliente){
+    string ruta = "http://" + this->clientesRegistrados[idCliente];
     ruta += "/notificar_mesa_lista";
-    this->cliente->begin(ruta.c_str());
-    int codigoRespuesta = this->cliente->GET();
-    this->cliente->end();
+    this->cliente.begin(ruta.c_str());
+    int codigoRespuesta = this->cliente.GET();
+    this->cliente.end();
 }
 
-void Mensajero::notificarRecepcionSolicitudMozo(int idCliente){
-    string ruta = this->clientesRegistrados[idCliente];
+void Mensajero::notificarRecepcionSolicitudMozo(string idCliente){
+    string ruta = "http://" + this->clientesRegistrados[idCliente];
     ruta += "/notificar_recepcion_solicitud_mozo";
-    this->cliente->begin(ruta.c_str());
-    int codigoRespuesta = this->cliente->GET();
-    this->cliente->end();
+    this->cliente.begin(ruta.c_str());
+    int codigoRespuesta = this->cliente.GET();
+    this->cliente.end();
 }
 
 void Mensajero::iniciarServidor(){

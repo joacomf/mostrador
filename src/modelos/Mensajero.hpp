@@ -17,14 +17,14 @@ using namespace std;
 class Mensajero {
     public:
         Mensajero(BandejaDeNotificaciones* bandeja);
-        void notificarEspera(int idCliente, int minutos);
-        void notificarMesaLista(int idCliente);
-        void notificarRecepcionSolicitudMozo(int idCliente);
+        void notificarEspera(string idCliente, int minutos);
+        void notificarMesaLista(string idCliente);
+        void notificarRecepcionSolicitudMozo(string idCliente);
     private:
         BandejaDeNotificaciones* bandeja;
-        HTTPClient* cliente;
+        HTTPClient cliente;
         AsyncWebServer* servidor;
-        std::map<int, string> clientesRegistrados;
+        std::map<string, string> clientesRegistrados;
 
         void iniciarAccessPoint();
         void iniciarServidor();
