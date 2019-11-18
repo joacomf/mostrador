@@ -6,13 +6,13 @@ using namespace std;
 
 class Notificacion {
     public:
-        Notificacion(string contenido, int idCliente);
+        Notificacion(string contenido, string idCliente);
         string obtenerContenido();
-        int obtenerIdCliente();
+        string obtenerIdCliente();
         virtual void procesar() = 0;
     private:
         string contenido;
-        int idCliente;
+        string idCliente;
 };
 
 #endif

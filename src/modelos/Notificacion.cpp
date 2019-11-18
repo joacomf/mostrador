@@ -1,6 +1,6 @@
 #include "Notificacion.hpp"
 
-Notificacion::Notificacion(string contenido, int idCliente){
+Notificacion::Notificacion(string contenido, string idCliente){
     this->contenido = contenido;
     this->idCliente = idCliente;
 }
@@ -9,6 +9,6 @@ string Notificacion::obtenerContenido(){
     return this->contenido;
 }
 
-int Notificacion::obtenerIdCliente(){
+string Notificacion::obtenerIdCliente(){
     return this->idCliente;
 }

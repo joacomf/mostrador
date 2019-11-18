@@ -5,7 +5,7 @@
 
 class NotificacionDeSolicitudDeEspera : public Notificacion {
     public:
-        NotificacionDeSolicitudDeEspera(string contenido, int idCliente);
+        NotificacionDeSolicitudDeEspera(string contenido, string idCliente);
         virtual void procesar();
 };
 

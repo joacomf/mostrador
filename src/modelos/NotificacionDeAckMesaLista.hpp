@@ -5,7 +5,7 @@
 
 class NotificacionDeAckMesaLista : public Notificacion {
     public:
-        NotificacionDeAckMesaLista(string contenido, int idCliente);
+        NotificacionDeAckMesaLista(string contenido, string idCliente);
         virtual void procesar();
 };
 
