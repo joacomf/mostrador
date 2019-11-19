@@ -12,3 +12,5 @@ string Notificacion::obtenerContenido(){
 string Notificacion::obtenerIdCliente(){
     return this->idCliente;
 }
+
+Notificacion::~Notificacion(){}

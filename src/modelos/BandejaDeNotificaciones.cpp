@@ -38,3 +38,11 @@ string BandejaDeNotificaciones::obtenerTextoDeLaNotificacionActiva(){
 
     return texto;
 }
+
+void BandejaDeNotificaciones::eliminarNotificacionActiva(){
+    if(this->notificaciones.size() > 0){
+        delete this->notificaciones[this->notificacionActiva];
+        this->notificaciones.erase(this->notificaciones.begin() + this->notificacionActiva);
+        this->notificacionActiva = this->notificaciones.size() - 1;
+    }
+}

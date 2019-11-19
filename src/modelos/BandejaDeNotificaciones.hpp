@@ -14,6 +14,8 @@ class BandejaDeNotificaciones {
         void notificacionSiguiente();
         void notificacionAnterior();
         string obtenerTextoDeLaNotificacionActiva();
+        void eliminarNotificacion(int posicion);
+        void eliminarNotificacionActiva();
     private:
         vector<Notificacion*> notificaciones;
         int notificacionActiva;

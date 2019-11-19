@@ -10,6 +10,7 @@ class Notificacion {
         string obtenerContenido();
         string obtenerIdCliente();
         virtual void procesar() = 0;
+        virtual ~Notificacion();
     private:
         string contenido;
         string idCliente;

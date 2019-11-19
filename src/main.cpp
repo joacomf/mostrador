@@ -47,6 +47,7 @@ void decidirQueHacer(char teclaPresionada){
         cursor->quitarUnDigito();
         break;
     case '*':
+        bandejaDeNotificaciones->eliminarNotificacionActiva();
         break;
     case '#':
         if(cliente->obtenerValor() != ""){
