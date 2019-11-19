@@ -20,6 +20,7 @@ class Mensajero {
         void notificarEspera(string idCliente, int minutos);
         void notificarMesaLista(string idCliente);
         void notificarRecepcionSolicitudMozo(string idCliente);
+        bool estaRegistrado(string idCliente);
     private:
         BandejaDeNotificaciones* bandeja;
         HTTPClient cliente;
