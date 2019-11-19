@@ -1,4 +1,5 @@
 #include "BandejaDeNotificaciones.hpp"
+#include "Arduino.h"
 
 BandejaDeNotificaciones::BandejaDeNotificaciones(){
     this->notificacionActiva = 0;
@@ -41,8 +42,8 @@ string BandejaDeNotificaciones::obtenerTextoDeLaNotificacionActiva(){
 
 void BandejaDeNotificaciones::eliminarNotificacionActiva(){
     if(this->notificaciones.size() > 0){
+        this->notificacionActiva = this->notificaciones.size() - 1;
         delete this->notificaciones[this->notificacionActiva];
         this->notificaciones.erase(this->notificaciones.begin() + this->notificacionActiva);
-        this->notificacionActiva = this->notificaciones.size() - 1;
     }
 }
