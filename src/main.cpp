@@ -50,9 +50,7 @@ void decidirQueHacer(char teclaPresionada){
         bandejaDeNotificaciones->eliminarNotificacionActiva();
         break;
     case '#':
-        if(cliente->obtenerValor() != ""){
-            mensajero->notificarMesaLista(cliente->obtenerValor().c_str());
-        }
+        mensajero->notificarMesaLista(cliente->obtenerValor().c_str());
         break;
     case 'N':
         //Nada
