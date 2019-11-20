@@ -7,7 +7,6 @@ BandejaDeNotificaciones::BandejaDeNotificaciones(){
 
 void BandejaDeNotificaciones::agregarNotificacion(Notificacion* notificacion){
     this->notificaciones.push_back(notificacion);
-    this->notificacionSiguiente();
 }
 
 void BandejaDeNotificaciones::notificacionSiguiente(){
@@ -42,8 +41,8 @@ string BandejaDeNotificaciones::obtenerTextoDeLaNotificacionActiva(){
 
 void BandejaDeNotificaciones::eliminarNotificacionActiva(){
     if(this->notificaciones.size() > 0){
-        this->notificacionActiva = this->notificaciones.size() - 1;
         delete this->notificaciones[this->notificacionActiva];
         this->notificaciones.erase(this->notificaciones.begin() + this->notificacionActiva);
+        this->notificacionActiva = 0;
     }
 }
