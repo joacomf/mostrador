@@ -13,6 +13,7 @@ void Pantalla::mostrar() {
         this->imprimirCliente();
         this->imprimirTiempo();
         this->imprimirNotificacion();
+        this->imprimirCantidadDeNotificaciones();
         this->posicionarCursor();
         this->reiniciarCambios();
         delay(100);
@@ -42,6 +43,13 @@ void Pantalla::imprimirTiempo(){
     lcd.print(this->tiempo.c_str());
 }
 
+void Pantalla::imprimirCantidadDeNotificaciones(){
+    if(cantidadDeNotificaciones > 0){
+        lcd.setCursor(14, this->PRIMER_FILA);
+        lcd.print(this->cantidadDeNotificaciones);
+    }
+}
+
 void Pantalla::imprimirNotificacion(){
     lcd.home();
     lcd.print(this->notificacion.c_str());
@@ -68,6 +76,12 @@ void Pantalla::establecerNotificacion(string notificacion){
     this->notificacion = notificacion;
     
 }
+
+void Pantalla::establecerCantidadDeNotificaciones(int cantidadDeNotificaciones){
+    this->hayCambios = this->hayCambios || (cantidadDeNotificaciones != this->cantidadDeNotificaciones);
+    this->cantidadDeNotificaciones = cantidadDeNotificaciones;
+}
+
 void Pantalla::establecerCursor(char cursor){
     this->hayCambios = this->hayCambios || (cursor != this->cursor);
     this->cursor = cursor;

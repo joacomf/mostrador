@@ -65,6 +65,7 @@ void actualizarPantalla(){
     pantalla->establecerCliente(cliente->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
     pantalla->establecerNotificacion(bandejaDeNotificaciones->obtenerTextoDeLaNotificacionActiva());
+    pantalla->establecerCantidadDeNotificaciones(bandejaDeNotificaciones->cantidadDeNotificaciones());
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
 }

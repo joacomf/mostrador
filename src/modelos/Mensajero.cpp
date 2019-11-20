@@ -78,7 +78,7 @@ void Mensajero::iniciarServidor(){
         if(cliente != NULL && cliente->name() == "cliente"){
             string idCliente = cliente->value().c_str();
             string notificacion = idCliente;
-            notificacion += " CONS. ESPERA";
+            notificacion += " CONS. ESP.";
             this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion, idCliente));
             request->send(200, "text/plain", "Espera consultada");
         }
@@ -90,7 +90,7 @@ void Mensajero::iniciarServidor(){
         if(cliente != NULL && cliente->name() == "cliente"){
             string idCliente = cliente->value().c_str();
             string notificacion = idCliente.c_str();
-            notificacion += " REC. MENSAJE";
+            notificacion += " REC. MJE";
             this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion, idCliente));
             request->send(200, "text/plain", "Confirmacion exitosa");
         }

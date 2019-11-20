@@ -47,3 +47,7 @@ void BandejaDeNotificaciones::eliminarNotificacionActiva(){
         this->notificacionActiva = 0;
     }
 }
+
+int BandejaDeNotificaciones::cantidadDeNotificaciones(){
+    return this->notificaciones.size();
+}
