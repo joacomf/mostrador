@@ -1,12 +1,13 @@
 #include "BandejaDeNotificaciones.hpp"
-#include "Arduino.h"
 
 BandejaDeNotificaciones::BandejaDeNotificaciones(){
     this->notificacionActiva = 0;
+    this->controladorDeAlertas = new ControladorDeAlertas();
 }
 
 void BandejaDeNotificaciones::agregarNotificacion(Notificacion* notificacion){
     this->notificaciones.push_back(notificacion);
+    this->controladorDeAlertas->comunicarNuevaNotificacion();
 }
 
 void BandejaDeNotificaciones::notificacionSiguiente(){
