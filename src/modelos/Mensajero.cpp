@@ -28,10 +28,8 @@ bool Mensajero::estaRegistrado(string idCliente){
 
 void Mensajero::notificarEspera(string idCliente, string minutos){
     if(this->estaRegistrado(idCliente)){
-        Serial.print("Voy a mandar notificacion de espera");
         string ruta = "http://" + this->clientesRegistrados[idCliente];
         ruta += "/notificar_espera?minutos=" + minutos;
-        Serial.print(ruta.c_str());
         this->cliente.begin(ruta.c_str());
         int codigoRespuesta = this->cliente.GET();
         this->cliente.end();
@@ -40,10 +38,8 @@ void Mensajero::notificarEspera(string idCliente, string minutos){
 
 void Mensajero::notificarMesaLista(string idCliente){
     if(this->estaRegistrado(idCliente)){
-        Serial.print("Voy a mandar notificacion mesa lista");
         string ruta = "http://" + this->clientesRegistrados[idCliente];
         ruta += "/notificar_mesa_lista";
-        Serial.print(ruta.c_str());
         this->cliente.begin(ruta.c_str());
         int codigoRespuesta = this->cliente.GET();
         this->cliente.end();

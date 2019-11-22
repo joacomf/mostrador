@@ -62,6 +62,9 @@ void decidirQueHacer(char teclaPresionada){
         } else {
             mensajero->notificarEspera(cliente->obtenerValor(), tiempo->obtenerValor());
         }
+        cliente->establecerValor("");
+        tiempo->establecerValor("");
+        cursor = cliente;
         break;
     case 'N':
         //Nada
