@@ -7,6 +7,7 @@ using namespace std;
 class Editable {
     public:
         Editable(char id);
+        void establecerValor(string valor);
         void agregarDigito(char digito);
         void quitarUnDigito();
         void reiniciar();

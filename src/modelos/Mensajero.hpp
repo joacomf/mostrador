@@ -7,21 +7,24 @@
 #include <HTTPClient.h>
 #include <ESPAsyncWebServer.h>
 #include "BandejaDeNotificaciones.hpp"
-#include "Notificacion.hpp"
+#include "NotificacionDeSolicitudDeEspera.hpp"
+#include "NotificacionDeAckMesaLista.hpp"
+#include "NotificacionDeSolicitudDeMozo.hpp"
 
 using namespace std;
 
 class Mensajero {
     public:
         Mensajero(BandejaDeNotificaciones* bandeja);
-        void notificarEspera(int idCliente, int minutos);
-        void notificarMesaLista(int idCliente);
-        void notificarRecepcionSolicitudMozo(int idCliente);
+        void notificarEspera(string idCliente, string minutos);
+        void notificarMesaLista(string idCliente);
+        void notificarRecepcionSolicitudMozo(string idCliente);
+        bool estaRegistrado(string idCliente);
     private:
         BandejaDeNotificaciones* bandeja;
-        HTTPClient* cliente;
+        HTTPClient cliente;
         AsyncWebServer* servidor;
-        std::map<int, string> clientesRegistrados;
+        std::map<string, string> clientesRegistrados;
 
         void iniciarAccessPoint();
         void iniciarServidor();

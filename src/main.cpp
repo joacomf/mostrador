@@ -37,22 +37,41 @@ void decidirQueHacer(char teclaPresionada){
         bandejaDeNotificaciones->notificacionSiguiente();
         break;
     case 'C':
-        cursor = cliente;
+        if(cursor == cliente){
+            cursor = tiempo;
+        } else {
+            cursor = cliente;
+        }
         break;
     case 'D':
-        cursor = tiempo;
+        cursor->quitarUnDigito();
         break;
     case '*':
+        {
+            Notificacion* notificacionActiva = bandejaDeNotificaciones->mostrarNotificacionActiva();
+            if(notificacionActiva != NULL){
+                notificacionActiva->procesar(cursor, cliente, tiempo);
+                bandejaDeNotificaciones->eliminarNotificacionActiva();
+            }
+
+        }
         break;
     case '#':
-        cursor->quitarUnDigito();
+        if(tiempo->obtenerValor() == "" || tiempo->obtenerValor() == "0"){
+            mensajero->notificarMesaLista(cliente->obtenerValor());
+        } else {
+            mensajero->notificarEspera(cliente->obtenerValor(), tiempo->obtenerValor());
+        }
+        cliente->establecerValor("");
+        tiempo->establecerValor("");
+        cursor = cliente;
         break;
     case 'N':
         //Nada
         break;
     default:
         cursor->agregarDigito(teclaPresionada);
-       break;
+        break;
   }
 }
 
@@ -60,6 +79,7 @@ void actualizarPantalla(){
     pantalla->establecerCliente(cliente->obtenerValor());
     pantalla->establecerTiempo(tiempo->obtenerValor());
     pantalla->establecerNotificacion(bandejaDeNotificaciones->obtenerTextoDeLaNotificacionActiva());
+    pantalla->establecerCantidadDeNotificaciones(bandejaDeNotificaciones->cantidadDeNotificaciones());
     pantalla->establecerCursor(cursor->obtenerId());
     pantalla->mostrar();
 }

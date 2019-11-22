@@ -15,12 +15,14 @@ class Pantalla {
         void establecerCliente(string cliente);
         void establecerTiempo(string tiempo);
         void establecerNotificacion(string notificacion);
+        void establecerCantidadDeNotificaciones(int cantidadDeNotificaciones);
         void establecerCursor(char cursor);
     private:
         void imprimirMarco();
         void imprimirCliente();
         void imprimirTiempo();
         void imprimirNotificacion();
+        void imprimirCantidadDeNotificaciones();
         void posicionarCursor();
         void reiniciarCambios();
 
@@ -29,6 +31,7 @@ class Pantalla {
         string notificacion = "";
         bool hayCambios = true;
         char cursor;
+        int cantidadDeNotificaciones = 0;
 
         const short POSICION_INICIAL_CLIENTE = 0;
         const short POSICION_INICIAL_TIEMPO = 9;

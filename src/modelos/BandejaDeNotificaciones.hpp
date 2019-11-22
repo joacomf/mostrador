@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include "Notificacion.hpp"
+#include "ControladorDeAlertas.hpp"
+
 using namespace std;
 
 class BandejaDeNotificaciones {
@@ -14,8 +16,12 @@ class BandejaDeNotificaciones {
         void notificacionSiguiente();
         void notificacionAnterior();
         string obtenerTextoDeLaNotificacionActiva();
+        void eliminarNotificacion(int posicion);
+        void eliminarNotificacionActiva();
+        int cantidadDeNotificaciones();
     private:
         vector<Notificacion*> notificaciones;
+        ControladorDeAlertas* controladorDeAlertas;
         int notificacionActiva;
         
 };

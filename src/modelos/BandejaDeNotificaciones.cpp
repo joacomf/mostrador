@@ -2,11 +2,12 @@
 
 BandejaDeNotificaciones::BandejaDeNotificaciones(){
     this->notificacionActiva = 0;
+    this->controladorDeAlertas = new ControladorDeAlertas();
 }
 
 void BandejaDeNotificaciones::agregarNotificacion(Notificacion* notificacion){
     this->notificaciones.push_back(notificacion);
-    this->notificacionSiguiente();
+    this->controladorDeAlertas->comunicarNuevaNotificacion();
 }
 
 void BandejaDeNotificaciones::notificacionSiguiente(){
@@ -37,4 +38,16 @@ string BandejaDeNotificaciones::obtenerTextoDeLaNotificacionActiva(){
     }
 
     return texto;
+}
+
+void BandejaDeNotificaciones::eliminarNotificacionActiva(){
+    if(this->notificaciones.size() > 0){
+        delete this->notificaciones[this->notificacionActiva];
+        this->notificaciones.erase(this->notificaciones.begin() + this->notificacionActiva);
+        this->notificacionActiva = 0;
+    }
+}
+
+int BandejaDeNotificaciones::cantidadDeNotificaciones(){
+    return this->notificaciones.size();
 }
