@@ -26,10 +26,12 @@ bool Mensajero::estaRegistrado(string idCliente){
     return this->clientesRegistrados.find(idCliente) != this->clientesRegistrados.end();
 }
 
-void Mensajero::notificarEspera(string idCliente, int minutos){
+void Mensajero::notificarEspera(string idCliente, string minutos){
     if(this->estaRegistrado(idCliente)){
+        Serial.print("Voy a mandar notificacion de espera");
         string ruta = "http://" + this->clientesRegistrados[idCliente];
         ruta += "/notificar_espera?minutos=" + minutos;
+        Serial.print(ruta.c_str());
         this->cliente.begin(ruta.c_str());
         int codigoRespuesta = this->cliente.GET();
         this->cliente.end();
@@ -38,8 +40,10 @@ void Mensajero::notificarEspera(string idCliente, int minutos){
 
 void Mensajero::notificarMesaLista(string idCliente){
     if(this->estaRegistrado(idCliente)){
+        Serial.print("Voy a mandar notificacion mesa lista");
         string ruta = "http://" + this->clientesRegistrados[idCliente];
         ruta += "/notificar_mesa_lista";
+        Serial.print(ruta.c_str());
         this->cliente.begin(ruta.c_str());
         int codigoRespuesta = this->cliente.GET();
         this->cliente.end();
@@ -67,7 +71,7 @@ void Mensajero::iniciarServidor(){
             string idCliente = cliente->value().c_str();
             string notificacion = idCliente;
             notificacion += " MOZO";
-            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(notificacion, idCliente));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(notificacion, idCliente, this));
             request->send(200, "text/plain", "Mozo Solicitado");
         }
         request->send(400, "text/plain", "Error de parametros");
@@ -79,7 +83,7 @@ void Mensajero::iniciarServidor(){
             string idCliente = cliente->value().c_str();
             string notificacion = idCliente;
             notificacion += " CONS. ESP.";
-            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion, idCliente));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion, idCliente, this));
             request->send(200, "text/plain", "Espera consultada");
         }
         request->send(400, "text/plain", "Error de parametros");
@@ -91,7 +95,7 @@ void Mensajero::iniciarServidor(){
             string idCliente = cliente->value().c_str();
             string notificacion = idCliente.c_str();
             notificacion += " REC. MJE";
-            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion, idCliente));
+            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion, idCliente, this));
             request->send(200, "text/plain", "Confirmacion exitosa");
         }
         request->send(400, "text/plain", "Error de parametros");

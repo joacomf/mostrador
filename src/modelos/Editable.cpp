@@ -26,3 +26,7 @@ char Editable::obtenerId(){
 string Editable::obtenerValor(){
     return this->valor;
 }
+
+void Editable::establecerValor(string valor){
+    this->valor = valor;
+}

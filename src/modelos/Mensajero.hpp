@@ -7,7 +7,6 @@
 #include <HTTPClient.h>
 #include <ESPAsyncWebServer.h>
 #include "BandejaDeNotificaciones.hpp"
-#include "Notificacion.hpp"
 #include "NotificacionDeSolicitudDeEspera.hpp"
 #include "NotificacionDeAckMesaLista.hpp"
 #include "NotificacionDeSolicitudDeMozo.hpp"
@@ -17,7 +16,7 @@ using namespace std;
 class Mensajero {
     public:
         Mensajero(BandejaDeNotificaciones* bandeja);
-        void notificarEspera(string idCliente, int minutos);
+        void notificarEspera(string idCliente, string minutos);
         void notificarMesaLista(string idCliente);
         void notificarRecepcionSolicitudMozo(string idCliente);
         bool estaRegistrado(string idCliente);

@@ -47,10 +47,21 @@ void decidirQueHacer(char teclaPresionada){
         cursor->quitarUnDigito();
         break;
     case '*':
-        bandejaDeNotificaciones->eliminarNotificacionActiva();
+        {
+            Notificacion* notificacionActiva = bandejaDeNotificaciones->mostrarNotificacionActiva();
+            if(notificacionActiva != NULL){
+                notificacionActiva->procesar(cursor, cliente, tiempo);
+                bandejaDeNotificaciones->eliminarNotificacionActiva();
+            }
+
+        }
         break;
     case '#':
-        mensajero->notificarMesaLista(cliente->obtenerValor().c_str());
+        if(tiempo->obtenerValor() == "" || tiempo->obtenerValor() == "0"){
+            mensajero->notificarMesaLista(cliente->obtenerValor());
+        } else {
+            mensajero->notificarEspera(cliente->obtenerValor(), tiempo->obtenerValor());
+        }
         break;
     case 'N':
         //Nada
