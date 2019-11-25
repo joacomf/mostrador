@@ -65,9 +65,7 @@ void Mensajero::iniciarServidor(){
         AsyncWebParameter* cliente = request->getParam(0);
         if(cliente != NULL && cliente->name() == "cliente"){
             string idCliente = cliente->value().c_str();
-            string notificacion = idCliente;
-            notificacion += " MOZO";
-            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(notificacion, idCliente, this));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeMozo(idCliente, this));
             request->send(200, "text/plain", "Mozo Solicitado");
         }
         request->send(400, "text/plain", "Error de parametros");
@@ -77,9 +75,7 @@ void Mensajero::iniciarServidor(){
         AsyncWebParameter* cliente = request->getParam(0);
         if(cliente != NULL && cliente->name() == "cliente"){
             string idCliente = cliente->value().c_str();
-            string notificacion = idCliente;
-            notificacion += " CONS. ESP.";
-            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(notificacion, idCliente, this));
+            this->bandeja->agregarNotificacion(new NotificacionDeSolicitudDeEspera(idCliente, this));
             request->send(200, "text/plain", "Espera consultada");
         }
         request->send(400, "text/plain", "Error de parametros");
@@ -89,9 +85,7 @@ void Mensajero::iniciarServidor(){
         AsyncWebParameter* cliente = request->getParam(0);
         if(cliente != NULL && cliente->name() == "cliente"){
             string idCliente = cliente->value().c_str();
-            string notificacion = idCliente.c_str();
-            notificacion += " REC. MJE";
-            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(notificacion, idCliente, this));
+            this->bandeja->agregarNotificacion(new NotificacionDeAckMesaLista(idCliente, this));
             request->send(200, "text/plain", "Confirmacion exitosa");
         }
         request->send(400, "text/plain", "Error de parametros");

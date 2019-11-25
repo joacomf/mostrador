@@ -1,7 +1,7 @@
 #include "Notificacion.hpp"
 
-Notificacion::Notificacion(string contenido, string idCliente, Mensajero* mensajero){
-    this->contenido = contenido;
+Notificacion::Notificacion(string idCliente, Mensajero* mensajero){
+    this->contenido = idCliente + " ";
     this->idCliente = idCliente;
     this->mensajero = mensajero;
 }
